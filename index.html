@@ -2950,6 +2950,51 @@ var e,t;e=this,t=function(){"use strict";function e(e,t){var n=Object.keys(e);if
         ];
         var VALID = {};
         CATEGORIES.forEach(function (c) { VALID[c[0]] = c[1]; });
+        var EXPLICIT = {
+          "food-drink": ["Chick-fil-A", "Chipotle", "DoorDash — DashPass for Students", "Grubhub+ Student Membership", "HelloFresh", "Papa John's",
+            "Shake Shack", "Starbucks", "Thrive Market", "Uber One for Students"],
+          "fashion": ["ASOS", "Aerie", "Aeropostale", "Allen Edmonds", "American Eagle", "Cole Haan", "Crocs", "DSW", "Foot Locker", "Gymshark", "H&M",
+            "Hollister", "J.Crew", "Kipling", "Levi's", "Lounge", "Lululemon", "Lulus", "Madewell", "Missguided", "Nike", "PacSun",
+            "Princess Polly", "Ray-Ban", "SHEIN", "Skechers", "The North Face", "UGG", "UNIQLO", "Urban Outfitters", "Vans", "Vivobarefoot",
+            "adidas", "edikted"],
+          "everyday": ["1-800 Contacts", "AT&T", "Amazon Prime Student", "Amtrak", "Best Buy", "Campus gyms & YMCA",
+            "Car rental — young-driver fee waivers", "Delta", "Driver's education discount", "Emirates student fares", "Expedia", "FlixBus",
+            "Good student auto-insurance discount", "Headspace", "Hotels", "IKEA", "Lufthansa GenerationFly", "ONE/SIZE", "Planet Fitness",
+            "Qatar Airways Student Club", "Sam's Club", "Singapore Airlines", "SoFi (student banking)", "Student banking", "StudentUniverse",
+            "T-Mobile", "Target Circle college promo", "Tarte Cosmetics", "Tello Mobile", "TurboTax", "United Airlines", "Verizon",
+            "Walmart+ student offer", "Xfinity student offers", "YNAB (You Need A Budget)", "Zipcar University Program"],
+          "entertainment": ["AMC Theatres", "Cinemark", "Concerts & live events", "Disney+ student", "Hulu (student)", "Max (HBO) student",
+            "Movie tickets via ID.me Shop", "Museums", "NBA / WNBA League Pass", "Netflix", "Paramount+ student", "Peacock student",
+            "Regal Cinemas", "Six Flags", "Tinder Gold", "YouTube Premium (student)"],
+          "learning": ["AWS Educate", "AlgoExpert", "Babbel", "Boot.dev", "Codecademy", "Codédex", "Coursera", "DataCamp", "Educative",
+            "Financial Times", "FrontendMasters", "GitHub Campus Experts", "GoRails", "Interview Cake", "JetBrains Academy", "Kaggle",
+            "LinkedIn Learning", "MasterClass", "Microsoft Learn", "OpenStax", "Pimsleur", "Postman Student Expert", "Preply",
+            "Project Gutenberg", "Rosetta Stone", "Scribd", "Scrimba", "SymfonyCasts", "The Economist", "Wall Street Journal", "Wired",
+            "edX"],
+          "tech-devices": ["Acer", "Apple Education Store", "Dell Education Store / Alienware", "Garmin", "HP Academy", "Lenovo",
+            "Samsung Education Offer Program"],
+          "tech-software": ["1Password", "Adobe Creative Cloud (student)", "Anthropic Claude", "Appfigures", "Apple Creator Studio (student)",
+            "Autodesk Education", "Canva Pro for Education", "ChatGPT Plus", "Dashlane", "Dashlane (student offer)",
+            "ElevenLabs for Students", "Evernote", "ExpressVPN", "Figma for Education", "Google AI Pro (Gemini)", "Grammarly", "HazeOver",
+            "IconScout", "Icons8", "MATLAB / MathWorks", "Microsoft 365", "Microsoft 365 Education", "Notion", "Notion Education",
+            "Notion Template Collection", "Octicons", "Overleaf Premium", "Perplexity Education Pro", "PomoDone", "Prezi EDU plans",
+            "ProWritingAid", "Proton Unlimited", "Raycast Pro", "Simple Analytics", "Sketch", "Tableau", "Themeisle", "ToDiagram", "Ulysses",
+            "Visme"],
+          "tech-audio": ["Apple Music Student", "Pandora Premium", "Sonos", "Spotify Premium Student + Hulu", "TIDAL student"],
+          "tech-cloud": [".TECH", "Adafruit", "Appwrite", "Arduino", "Camber", "GitHub Pages", "Google Cloud", "Heroku", "IBM Cloud Academic Initiative",
+            "Microsoft Azure (13–17)", "Microsoft Azure (18+)", "Microsoft Azure for Students", "Name.com", "Namecheap",
+            "Oracle Cloud Free Tier", "Squarespace", "Webflow", "Wix", "Zyte"],
+          "tech-devtools": ["AstraSecurity", "Blackfire", "Blockchair", "Bootstrap Studio", "BrowserStack", "CARTO", "Clerk", "CodeScene", "Codecov",
+            "ConfigCat", "Datadog", "DeepScan", "DevCycle", "Doppler", "GitHub Codespaces", "GitHub Copilot", "GitHub Desktop", "GitHub Pro",
+            "GitKraken", "GitLens", "Honeybadger", "Imgbot", "JetBrains", "JetBrains (direct education license)", "LambdaTest", "LocalStack",
+            "New Relic", "POEditor", "Pageclip", "Polypane", "PopSQL", "Requestly", "SQLGate", "Sentry", "Shodan (academic upgrade)",
+            "Stripe", "Tenable Nessus (education)", "Termius", "Testmail", "Tower", "Travis CI", "Unity Student", "Vaadin",
+            "Visual Studio Code", "Visual Studio Dev Essentials", "Working Copy", "Xojo"]
+        };
+        var EXPLICIT_BY_NAME = Object.create(null);
+        Object.keys(EXPLICIT).forEach(function (slug) {
+          EXPLICIT[slug].forEach(function (n) { EXPLICIT_BY_NAME[n] = slug; });
+        });
 
         function inList(name, list) { return list.indexOf(name) !== -1; }
         function proposedCategory(name, group, page) {
@@ -3096,7 +3141,7 @@ var e,t;e=this,t=function(){"use strict";function e(e,t){var n=Object.keys(e);if
         });
 
         rows.forEach(function (row) {
-          row.category = proposedCategory(row.name, row.group, row.page);
+          row.category = Object.prototype.hasOwnProperty.call(EXPLICIT_BY_NAME, row.name) ? EXPLICIT_BY_NAME[row.name] : proposedCategory(row.name, row.group, row.page);
           row.cross = (CROSS[row.name] || []).filter(function (c) { return c !== row.category; }).slice(0, 2);
         });
 
