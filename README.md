@@ -1,8 +1,8 @@
-# Student Benefits Catalogue — US Edition
+# StashU — Student Benefits, All in One Place
 
 246 verified student benefits, deals, and freebies — one searchable catalogue for students in the US.
 
-**Live site:** [student-benefits-catalogue.vercel.app](https://student-benefits-catalogue.vercel.app)
+**Live site:** [nx9161.github.io/student-benefits-catalogue](https://nx9161.github.io/student-benefits-catalogue/)
 
 ## About
 
