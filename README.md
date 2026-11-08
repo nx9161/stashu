@@ -2,7 +2,7 @@
 
 246 verified student benefits, deals, and freebies — one searchable catalogue for students in the US.
 
-**Live site:** [nx9161.github.io/student-benefits-catalogue](https://nx9161.github.io/student-benefits-catalogue/)
+**Live site:** [nx9161.github.io/stashu](https://nx9161.github.io/stashu/)
 
 ## About
 
